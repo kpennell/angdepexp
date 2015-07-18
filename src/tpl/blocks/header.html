@@ -1,0 +1,46 @@
+      <!-- navbar header -->
+      <div class="navbar-header bg-white" > <!-- / mobile header -->
+
+          <a class="navbar-brand text-lt visible-xs" href="#/denver/shows">
+            <img src="img/logoforweb.png" alt=""> VibeSample
+        </a>
+
+
+
+
+      </div>
+      <!-- / navbar header
+ <a class="navbar-brand  " href="#/"><img src="logoforweb.png"></i> Vibesample</a>
+
+       -->
+
+      <!-- navbar collapse      -->
+      <div class="collapse pos-rlt navbar-collapse box-shadow {{app.settings.navbarCollapseColor}}">
+        <!-- buttons -->
+
+      <div class="nav navbar-nav">
+
+        <a class="navbar-brand text-lt" href="#/denver/shows">
+            <img src="img/logoforweb.png" alt=""> VibeSample
+        </a> 
+
+      </div>
+
+        <!-- nabar right -->
+        <ul class="nav navbar-nav navbar-right">
+
+          <li>
+          <a href="#/denver/favorites" id="heartheader"><i class="fa fa-heart fa-lg"></i><span class="favoriteslength"> {{FavoritesLength}}</span></a>
+          </li>
+
+          <li class="sep"></li>
+
+          <li ng-hide-auth><a href="#/denver/signin">Sign up or in</a></li>
+          <li ng-show-auth><a href="#/denver/account">Account</a></li>
+            <!-- / dropdown -->
+
+        </ul>
+        <!-- / navbar right -->
+
+      </div>
+      <!-- / navbar collapse -->

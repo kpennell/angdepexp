@@ -1,0 +1,132 @@
+<!-- content -->
+<div id="content" class="app-content" role="main">
+  <div class="app-content-body  app-content-full">
+
+    <!-- hbox layout -->
+    <div class="hbox hbox-auto-xs bg-light " ng-init="
+  app.settings.asideFolded = true;
+  app.settings.asideDock = false;
+  app.settings.container = false;
+  app.hideAside = true">
+
+      <!-- column -->
+      <div class="col w-xxl lter b-l">
+        <div class="wrapper-md">
+
+          <div class="m-b-sm text-md">
+
+            Discover Live Music You Will Love in Denver
+
+
+            </span>
+          
+            <br>
+            <span class="numOfShows"> {{filteredShows.length }} shows on
+              <div class="btn-group" dropdown dropdown-append-to-body>
+                <button type="button" class="btndropdown btn-primary btn-small dropdown-toggle" dropdown-toggle>
+                  {{day | date: 'EEEE, MMMM d'}}
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li ng-repeat="day in days" ng-click="selectDay(day)">
+                    <a href>{{day | date: 'EEEE, MMMM d'}}</a>
+                  </li>
+                </ul>
+              </div>
+          </div>
+
+            <ul class="list-group no-bg no-borders pull-in songgroup scrollable hover">
+            <li class="list-group-item" ng-repeat="show in filteredShows" ng-mouseover="menuMouse(show)" ng-mouseout="menuMouseout(show)" ng-class="{hoverListStyle: $index == hoveritem}">
+
+              <span class="pull-right h3 text-muted m-l-xs">
+                <i class="fa" ng-click="checkIfLoggedIn(show)" ng-class="{'fa-heart falist': loggedInUserFavorites[show.properties.id], 'fa-heart-o falist': !loggedInUserFavorites[show.properties.id]}"></i>
+
+                <i class="fa fa-play falist" ng-click="player.play(show, $index)" ng-show="$index != trackPlayingIndex"></i>
+                <i class="fa fa-pause falist" ng-click="player.pause(show, $index)" ng-show="$index == trackPlayingIndex"></i></span>
+
+
+
+              <span class="pull-left thumb-sm avatar m-r m-t-sm">
+                <img ng-src="{{show.properties.artwork_url}}" alt="..." class="r">
+              </span>
+              <div class="clear">
+                <div><a ng-href={{show.properties.artist_url}} target="_blank">{{show.properties.artist}}</a></div>
+                <small class="text-muted"><a ng-href={{show.properties.venue_url}} target="_blank"> {{show.properties.venue_name}}</a></small>&nbsp;&middot;&nbsp;
+                <small>{{show.properties.date | num | date: 'h:mm a'}}</small>
+                <br>
+                <small class="text-muted">
+                  <span class="tags">{{show.properties.tags}}</span>
+                </small> &nbsp;&middot;&nbsp;
+                <small><a ng-href={{show.properties.ticket_url}} target="_blank"> {{show.properties.price | noFractionCurrency}}</a></small>
+              </div>
+            </li>
+          </ul>
+
+
+
+
+
+        </div>
+      </div>
+      <!-- /column -->
+      <!-- column -->
+      <div class="col item">
+        <leaflet center="center" events="events" geojson="geojson" defaults="defaults"></leaflet>
+
+      </div>
+      <!-- /column -->
+
+
+    </div>
+
+  </div>
+  <!-- /hbox layout -->
+
+
+  <footer id="footer" class="app-footer app-footer-fixed" role="footer" ng-show="filteredShows">
+
+    <div class="wrapper-sm b-t bg-light">
+
+
+      <div class="col-sm-4 col-md-2 col-lg-2 ">
+        <span class="about hidden-xs"><a href="#/denver/about"> About </a></span>
+        <a href="#/denver/favorites" id="heartheader" class="visible-xs-inline">
+          <i class="fa fa-heart fa-lg"></i>
+          <span class="favoriteslength visible-xs-inline"> {{FavoritesLength}}
+          </span>
+        </a>
+
+
+      </div>
+
+      <div class="col-lg-8 col-sm-4 col-md-8  ">
+        <span>
+          <i class="fa fa-play" ng-click="player.play(show)" ng-show="!player.playing"> </i>
+          <i class="fa fa-pause" ng-click="player.pause(show)" ng-show="player.playing"></i>
+        </span>
+
+        <div class="position">
+          <span class="track-progress" ng-click="setPosition($event)">
+            <span class="bar" style="width: {{ player.progress }}%;"></span>
+          </span>
+          <span class="time-elapsed">{{ player.position | prettyTime }} / </span>
+          <span class="total-time">{{ player.duration | prettyTime }}</span>
+        </div>
+      </div>
+
+      <div class="col-sm-4 col-md-2 col-lg-2 ">
+        <div class="track-info">
+          <i class="fa fa-soundcloud"></i>
+          <span class="title"><a ng-href={{player.currentTrack.properties.permalink_url}} target="_blank">{{ player.currentTrack.properties.track_name }}</a></span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+
+</div>

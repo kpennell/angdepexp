@@ -1,0 +1,35 @@
+<div class="container w-xxl w-auto-xs">
+  <a href class="navbar-brand block m-t">Favorite Shows</a>
+  <div class="m-b-lg">
+
+    <div class="wrapper-md">
+      <!-- ng-repeat goes here -->
+      <ul class="list-group no-bg no-borders pull-in">
+         <li class="list-group-item" ng-repeat="favorite in currentlyFavorited" ng-mouseover="menuMouse(show)" ng-mouseout="menuMouseout(show)" ng-class="{hoverListStyle: $index == hoveritem}">
+
+           <span class="pull-right h3 text-muted m-l">
+           <i class="fa" ng-click="toggleStarred(favorite)" ng-class="{'fa-heart': UserFavorites[favorite.properties.id], 'fa-heart-o': !UserFavorites[favorite.properties.id]}"></i>
+
+
+
+           <i class="fa fa-play" ng-click="streamTrack(favorite)" ng-show="favorite.visible != false"></i>
+          <i class="fa fa-pause" ng-click="pauseTrack(favorite)" ng-show="favorite.visible == false"></i></span>
+
+            <span class="pull-left thumb-sm avatar m-r m-t-sm">
+              <img ng-src="{{favorite.properties.artwork_url}}" alt="..." class="r">
+            </span>
+          <div class="clear">
+            <div><a href>{{favorite.properties.artist}}</a></div>
+            <small class="text-muted">{{favorite.properties.venue}} &nbsp;&middot;&nbsp;{{favorite.properties.date | date}} </small>
+            <br>
+            <small class="text-muted">{{favorite.properties.tags}} &nbsp;&middot;&nbsp; {{favorite.properties.price | noFractionCurrency}}</small>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="text-center" ng-include="'tpl/blocks/page_footer.html'">
+    {% include 'blocks/page_footer.html' %}
+  </div>
+</div>
